@@ -1,1 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noru.life — A place where neurodivergent people actually get each other</title>
+<meta name="description" content="Noru.life connects neurodivergent people with friends, mentors, coaches and therapists who truly understand how your brain works.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --purple-50: #EEEDFE;
+    --purple-100: #CECBF6;
+    --purple-400: #7F77DD;
+    --purple-600: #534AB7;
+    --purple-800: #3C3489;
+    --purple-900: #26215C;
+    --teal-50: #E1F5EE;
+    --teal-600: #0F6E56;
+    --teal-800: #085041;
+    --coral-50: #FAECE7;
+    --coral-800: #712B13;
+    --bg: #FAFAF8;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.15);
+    --text: #1A1A1A;
+    --text-secondary: #6B6A64;
+    --text-muted: #9B9A94;
+    --radius: 12px;
+    --radius-lg: 18px;
+    --radius-pill: 100px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-mark {
+    width: 32px; height: 32px; border-radius: 9px;
+    background: var(--purple-50); display: flex; align-items: center; justify-content: center;
+  }
+  .nav-logo-mark svg { width: 18px; height: 18px; }
+  .nav-brand { font-size: 15px; font-weight: 600; color: var(--text); }
+  .nav-cta {
+    padding: 8px 18px; background: var(--purple-600); color: #fff;
+    border: none; border-radius: var(--radius-pill); font-size: 13px; font-weight: 500;
+    cursor: pointer; text-decoration: none; transition: opacity .15s;
+  }
+  .nav-cta:hover { opacity: .88; }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 5rem 1.5rem 4rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 14px; border-radius: var(--radius-pill);
+    background: var(--purple-50); color: var(--purple-800);
+    font-size: 12px; font-weight: 500; margin-bottom: 1.5rem;
+    border: 0.5px solid var(--purple-100);
+  }
+  .hero-badge .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--purple-400); animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(28px, 6vw, 44px);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+  }
+  h1 em { font-style: italic; color: var(--purple-600); }
+
+  .hero-sub {
+    font-size: clamp(15px, 2.5vw, 17px);
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 460px;
+    margin-left: auto; margin-right: auto;
+  }
+
+  /* WAITLIST FORM */
+  .waitlist-card {
+    background: var(--surface);
+    border: 0.5px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    max-width: 420px;
+    margin: 0 auto 1rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+  }
+  .form-row { display: flex; gap: 8px; }
+  .waitlist-card input[type="email"] {
+    flex: 1; padding: 12px 14px;
+    border: 0.5px solid var(--border-strong); border-radius: var(--radius);
+    font-size: 14px; font-family: inherit; color: var(--text);
+    background: var(--bg); outline: none; transition: border-color .15s;
+  }
+  .waitlist-card input[type="email"]:focus { border-color: var(--purple-400); }
+  .waitlist-card select {
+    width: 100%; padding: 11px 14px; margin-bottom: 10px;
+    border: 0.5px solid var(--border-strong); border-radius: var(--radius);
+    font-size: 13px; font-family: inherit; color: var(--text-secondary);
+    background: var(--bg); outline: none; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239B9A94' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+  }
+  .btn-join {
+    padding: 12px 24px; background: var(--purple-600); color: #fff;
+    border: none; border-radius: var(--radius); font-size: 14px; font-weight: 500;
+    cursor: pointer; white-space: nowrap; transition: opacity .15s; font-family: inherit;
+  }
+  .btn-join:hover { opacity: .88; }
+  .waitlist-meta {
+    text-align: center; font-size: 12px; color: var(--text-muted); margin-top: 10px;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .avatar-stack { display: flex; }
+  .avatar-stack span {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 1.5px solid var(--bg); margin-left: -4px; font-size: 9px;
+    display: flex; align-items: center; justify-content: center; font-weight: 500;
+  }
+  .success-msg { display: none; text-align: center; padding: .5rem 0; }
+  .success-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--teal-50); color: var(--teal-600);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px; font-size: 22px;
+  }
+
+  /* TRUSTED BY */
+  .trusted {
+    text-align: center; padding: 1rem 1.5rem 3rem;
+    font-size: 12px; color: var(--text-muted); letter-spacing: .04em;
+  }
+  .nd-tags {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 12px;
+  }
+  .nd-tag {
+    padding: 4px 12px; border-radius: var(--radius-pill);
+    border: 0.5px solid var(--border-strong);
+    font-size: 12px; color: var(--text-secondary);
+    background: var(--surface);
+  }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 0.5px solid var(--border); margin: 0; }
+
+  /* SECTIONS */
+  section { padding: 4rem 1.5rem; max-width: 640px; margin: 0 auto; }
+
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: .1em;
+    color: var(--purple-600); text-transform: uppercase; margin-bottom: .75rem;
+  }
+  h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(22px, 4vw, 30px);
+    font-weight: 600; line-height: 1.25;
+    letter-spacing: -0.02em; margin-bottom: .75rem;
+  }
+  h2 em { font-style: italic; color: var(--purple-600); }
+  .section-sub {
+    font-size: 15px; color: var(--text-secondary); line-height: 1.7;
+    margin-bottom: 2rem; max-width: 480px;
+  }
+
+  /* FEATURE GRID */
+  .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media(max-width: 480px) { .feat-grid { grid-template-columns: 1fr; } }
+  .feat-card {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 1.25rem;
+  }
+  .feat-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: var(--purple-50); display: flex; align-items: center;
+    justify-content: center; margin-bottom: 12px;
+  }
+  .feat-icon svg { width: 18px; height: 18px; stroke: var(--purple-600); }
+  .feat-title { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
+  .feat-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
+
+  /* HOW IT WORKS */
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step { display: flex; gap: 16px; position: relative; padding-bottom: 2rem; }
+  .step:last-child { padding-bottom: 0; }
+  .step-left { display: flex; flex-direction: column; align-items: center; }
+  .step-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--purple-50); border: 1.5px solid var(--purple-100);
+    color: var(--purple-800); font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .step-line {
+    width: 1.5px; flex: 1; background: var(--purple-100);
+    margin: 6px 0; min-height: 24px;
+  }
+  .step:last-child .step-line { display: none; }
+  .step-body { padding-top: 4px; }
+  .step-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .step-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* QUOTES */
+  .quote-grid { display: flex; flex-direction: column; gap: 12px; }
+  .quote-card {
+    background: var(--purple-50); border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem; border-left: 3px solid var(--purple-400);
+    border-radius: 0; border-radius: var(--radius-lg);
+  }
+  .quote-text {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 15px; font-style: italic; color: var(--purple-900);
+    line-height: 1.6; margin-bottom: 10px;
+  }
+  .quote-attr { font-size: 12px; color: var(--purple-600); font-weight: 500; }
+
+  /* CTA BOTTOM */
+  .cta-section {
+    background: var(--purple-900); color: #fff;
+    padding: 4rem 1.5rem; text-align: center;
+  }
+  .cta-section h2 { color: #fff; max-width: 480px; margin: 0 auto 1rem; }
+  .cta-section h2 em { color: var(--purple-100); }
+  .cta-section p { color: var(--purple-100); font-size: 15px; margin-bottom: 2rem; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .cta-form { display: flex; gap: 8px; max-width: 380px; margin: 0 auto; }
+  .cta-form input {
+    flex: 1; padding: 12px 14px;
+    border: 0.5px solid rgba(255,255,255,0.2); border-radius: var(--radius);
+    font-size: 14px; font-family: inherit; color: #fff;
+    background: rgba(255,255,255,0.1); outline: none;
+  }
+  .cta-form input::placeholder { color: rgba(255,255,255,0.45); }
+  .cta-form input:focus { border-color: rgba(255,255,255,0.5); }
+  .btn-cta {
+    padding: 12px 20px; background: #fff; color: var(--purple-900);
+    border: none; border-radius: var(--radius); font-size: 14px; font-weight: 600;
+    cursor: pointer; white-space: nowrap; font-family: inherit; transition: opacity .15s;
+  }
+  .btn-cta:hover { opacity: .9; }
+  .cta-note { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 12px; }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 1.5rem; text-align: center;
+    font-size: 12px; color: var(--text-muted);
+    border-top: 0.5px solid var(--border);
+  }
+
+  @media(max-width: 480px) {
+    .form-row { flex-direction: column; }
+    .cta-form { flex-direction: column; }
+    nav { padding: 0 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#534AB7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    </div>
+    <span class="nav-brand">Noru.life</span>
+  </a>
+  <a class="nav-cta" href="#waitlist">Join waitlist</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Now accepting early sign-ups
+  </div>
+  <h1>A place where neurodivergent people <em>actually</em> get each other</h1>
+  <p class="hero-sub">Noru.life connects you with friends, mentors, coaches and therapists who understand how your brain works — because theirs works that way too.</p>
+
+  <div class="waitlist-card" id="waitlist">
+    <div id="form-area">
+      <select id="role-select">
+        <option value="" disabled selected>I'm joining as...</option>
+        <option>Someone looking for support or connection</option>
+        <option>A coach, therapist or peer supporter</option>
+        <option>Both — give and receive</option>
+      </select>
+      <div class="form-row">
+        <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email">
+        <button class="btn-join" onclick="joinWaitlist()">Join waitlist</button>
+      </div>
+      <div class="waitlist-meta">
+        <div class="avatar-stack">
+          <span style="background:#EEEDFE;color:#3C3489">SR</span>
+          <span style="background:#E1F5EE;color:#085041">JK</span>
+          <span style="background:#FAECE7;color:#712B13">MP</span>
+        </div>
+        <span><strong id="count">247</strong> people already signed up</span>
+      </div>
+    </div>
+    <div class="success-msg" id="success-area">
+      <div class="success-icon">✓</div>
+      <p style="font-size:15px;font-weight:600;margin-bottom:6px">You're on the list!</p>
+      <p style="font-size:13px;color:var(--text-secondary);line-height:1.5">We'll be in touch when Noru.life launches. No spam, no pressure — we promise.</p>
+    </div>
+  </div>
+</div>
+
+<div class="trusted">
+  <p>Built for people who identify as</p>
+  <div class="nd-tags">
+    <span class="nd-tag">ADHD</span>
+    <span class="nd-tag">Autistic</span>
+    <span class="nd-tag">AuDHD</span>
+    <span class="nd-tag">Dyslexic</span>
+    <span class="nd-tag">Dyspraxic</span>
+    <span class="nd-tag">2e / gifted</span>
+    <span class="nd-tag">Late diagnosed</span>
+    <span class="nd-tag">Still figuring it out</span>
+  </div>
+</div>
+
+<hr>
+
+<section>
+  <p class="eyebrow">Why Noru.life</p>
+  <h2>Built <em>different</em> for brains that work differently</h2>
+  <p class="section-sub">Generic platforms weren't designed with us in mind. Every decision here — from matching to messaging — was made for neurodivergent people, by neurodivergent people.</p>
+  <div class="feat-grid">
+    <div class="feat-card">
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-5 0v-15A2.5 2.5 0 0 1 9.5 2z"/><path d="M14.5 8A2.5 2.5 0 0 1 17 10.5v9a2.5 2.5 0 0 1-5 0v-9A2.5 2.5 0 0 1 14.5 8z"/></svg>
+      </div>
+      <p class="feat-title">ND-first matching</p>
+      <p class="feat-desc">Match on diagnosis, comms style, sensory needs, and goals — not just location or price</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <p class="feat-title">Low-pressure messaging</p>
+      <p class="feat-desc">No read receipts, no reply pressure, async by default — communicate when you're ready</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <p class="feat-title">Safe community</p>
+      <p class="feat-desc">Verified providers, moderated spaces, clear boundaries — a place you can actually relax in</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <p class="feat-title">Community + services</p>
+      <p class="feat-desc">Find a friend and a coach in one place — no juggling multiple platforms</p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <p class="eyebrow">How it works</p>
+  <h2>Three steps to finding <em>your people</em></h2>
+  <p class="section-sub">No long forms. No awkward small talk. Just real connection with people who get it.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <p class="step-title">Build your profile your way</p>
+        <p class="step-desc">Tell us how your brain works, how you communicate best, and what you're actually looking for — in your own words, at your own pace.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <p class="step-title">Get matched by real compatibility</p>
+        <p class="step-desc">We surface people who match your ND type, communication preferences, sensory needs, and goals — with a compatibility score so you can see why.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-left">
+        <div class="step-num">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-body">
+        <p class="step-title">Connect at your own pace</p>
+        <p class="step-desc">Send a low-pressure intro, chat async, and book sessions securely through the platform. No rushing, no performing, no pressure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<section>
+  <p class="eyebrow">Early feedback</p>
+  <h2>What our beta testers say</h2>
+  <p class="section-sub">From people who've tried the prototype</p>
+  <div class="quote-grid">
+    <div class="quote-card">
+      <p class="quote-text">"Finally something that accounts for the fact I can't do phone calls and need written summaries. This is the first platform that felt like it was made for me."</p>
+      <p class="quote-attr">— Sarah, late-diagnosed ADHD, 34</p>
+    </div>
+    <div class="quote-card">
+      <p class="quote-text">"As an autistic coach I've always struggled to find clients who get how I communicate. Noru.life feels like it actually understands both sides of that."</p>
+      <p class="quote-attr">— Marcus, autistic ADHD coach</p>
+    </div>
+    <div class="quote-card">
+      <p class="quote-text">"The compatibility matching is everything. I'm not just looking at someone's photo and a generic bio — I can see if they actually communicate the way I need."</p>
+      <p class="quote-attr">— Jordan, AuDHD, 28</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-section">
+  <h2>Be first through the door</h2>
+  <p>Early members get free beta access and help shape what Noru.life becomes. This is your community — help us build it right.</p>
+  <div class="cta-form">
+    <input type="email" id="cta-email" placeholder="your@email.com" autocomplete="email">
+    <button class="btn-cta" onclick="joinCta()">Get early access</button>
+  </div>
+  <p class="cta-note">No spam. Unsubscribe any time. We're neurodivergent too — we know how overwhelming email can be.</p>
+</div>
+
+<footer>
+  <p style="font-weight:600;margin-bottom:4px;color:var(--text)">Noru.life</p>
+  <p>Built with care for the neurodivergent community &nbsp;·&nbsp; Coming soon</p>
+</footer>
+
+<script>
+var count = 247;
+
+function joinWaitlist() {
+  var email = document.getElementById('email-input').value.trim();
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address');
+    return;
+  }
+  count++;
+  document.getElementById('count').textContent = count;
+  document.getElementById('form-area').style.display = 'none';
+  document.getElementById('success-area').style.display = 'block';
+}
+
+function joinCta() {
+  var email = document.getElementById('cta-email').value.trim();
+  if (!email || !email.includes('@')) {
+    alert('Please enter a valid email address');
+    return;
+  }
+  document.getElementById('cta-email').value = '';
+  alert("You're on the list! We'll be in touch when Noru.life launches.");
+}
+</script>
+</body>
+</html>
 
