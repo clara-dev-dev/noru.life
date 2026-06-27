@@ -320,7 +320,7 @@
       </select>
       <div class="form-row">
         <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email">
-        <button class="btn-join" onclick="joinWaitlist()">Join waitlist</button>
+        <button class="btn-join" onclick="openForm()">Join waitlist</button>
       </div>
       <div class="waitlist-meta">
         <div class="avatar-stack">
@@ -458,7 +458,7 @@
   <p>Early members get free beta access and help shape what Noru.life becomes. This is your community — help us build it right.</p>
   <div class="cta-form">
     <input type="email" id="cta-email" placeholder="your@email.com" autocomplete="email">
-    <button class="btn-cta" onclick="joinCta()">Get early access</button>
+    <button class="btn-cta" onclick="openForm()">Get early access</button>
   </div>
   <p class="cta-note">No spam. Unsubscribe any time. We're neurodivergent too — we know how overwhelming email can be.</p>
 </div>
@@ -470,6 +470,9 @@
 
 <script>
 var count = 247;
+var formUrl = "https://docs.google.com/forms/d/e/1FAIpQLSeY71VyzxFmxqCgX1BvrCF7K-8qOpd3QZMSlqCTeaGIlmwo5w/viewform";
+
+function openForm() { window.open(formUrl, "_blank"); }
 
 function joinWaitlist() {
   var email = document.getElementById('email-input').value.trim();
@@ -495,4 +498,3 @@ function joinCta() {
 </script>
 </body>
 </html>
-
